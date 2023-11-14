@@ -39,9 +39,10 @@ def envia_sql(conexao : any, dataframe : pd.DataFrame, nome_tabela : str, schema
     - Função para fazer o carregamento dos dados para o banco de dados
     Argumentos:
     - conexao : Objeto de conexão do SQLAlchemy
-    - schema : Schema onde ficarão as tabelas no banco
+    - schema : (default = public) Schema onde ficarão as tabelas no banco
     - dataframe : Dataframe pandas com os dados
     - nome_tabela : Nome que a tabela terá no banco de dados
+    - if_exists : (default = replace) Comportamento da função caso a tabela já exista no banco de dados
     '''
     try:
         dataframe.to_sql(
