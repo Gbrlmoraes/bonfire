@@ -1,0 +1,10 @@
+let
+TodaysDate = DateTime.Date(DateTimeZone.SwitchZone( DateTimeZone.FixedLocalNow(), -3 )) & DateTime.Time(DateTimeZone.SwitchZone( DateTimeZone.FixedLocalNow(), -3 )),
+#"Converted to Table" = #table(1, {{TodaysDate}}),
+#"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "Last Refresh Date Time"}}),
+#"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"Last Refresh Date Time", type datetime}}),
+    #"Inserted Date" = Table.AddColumn(#"Changed Type", "Date", each DateTime.Date([Last Refresh Date Time]), type date),
+    #"Inserted Time" = Table.AddColumn(#"Inserted Date", "Time", each DateTime.Time([Last Refresh Date Time]), type time),
+    #"Colunas Renomeadas" = Table.RenameColumns(#"Inserted Time",{{"Last Refresh Date Time", "Ultima_Atualizacao"}, {"Date", "Data"}, {"Time", "Hora"}})
+in
+    #"Colunas Renomeadas"
