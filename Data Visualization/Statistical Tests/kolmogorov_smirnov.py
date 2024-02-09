@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy.stats import kstest
+from scipy.stats import kstest, probplot
 
 # Creating a function to check whether a variable follows a normal distribution or not
 def check_normal_distribuition(variable : str, data : pd.DataFrame, significance : float = 0.05):
